@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Jumbotron, Button } from "react-bootstrap";
+import { Jumbotron, Button, Card } from "react-bootstrap";
 import { Context } from "../store/appContext"; //conecta los componentes con el flux
 
 export const Home = () => {
@@ -7,6 +7,7 @@ export const Home = () => {
 
 	useEffect(() => {
 		actions.fetchPeople();
+		actions.fetchPlanet();
 	}, []);
 
 	return (
@@ -18,14 +19,20 @@ export const Home = () => {
 			<ul>
 				{store.peopleList.map((item, index) => {
 					return (
-						<li key={index}>
-							<span>{item.name}</span>
-							{store.favorites.includes(item.name) ? null : (
-								<Button onClick={() => actions.setFavorites(item.name)} variant="outline-primary">
-									Agregar
-								</Button>
-							)}
-						</li>
+						<Card style={{ width: "18rem" }} key={index}>
+							<Card.Img
+								variant="top"
+								src="https://as.com/meristation/imagenes/2019/11/21/noticias/1574336961_955124_1574337025_noticia_normal.jpg"
+							/>
+							<Card.Body>
+								<Card.Title>{item.name}</Card.Title>
+								{store.favorites.includes(item.name) ? null : (
+									<Button onClick={() => actions.setFavorites(item.name)} variant="outline-primary">
+										Agregar
+									</Button>
+								)}
+							</Card.Body>
+						</Card>
 					);
 				})}
 			</ul>

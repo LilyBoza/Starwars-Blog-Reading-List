@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			favorites: [],
-			peopleList: []
+			peopleList: [],
+			planetsList: []
 		},
 		actions: {
 			fetchPeople: async () => {
@@ -23,6 +24,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setFavorites: name => {
 				const store = getStore();
 				setStore({ favorites: [...store.favorites, name] });
+			},
+			fetchPlanet: async () => {
+				const URL = "https://www.swapi.tech/api/planets/";
+				const CONFIG = {
+					method: "GET",
+					headers: {
+						"Content-type": "application/json"
+					}
+				};
+				const response = await fetch(URL, CONFIG);
+				const json = await response.json();
+
+				console.log(">>DATA>>", json);
+				setStore({ planetsList: json.results });
+				// json.results es lo que me devuelve la API
 			}
 		}
 	};
