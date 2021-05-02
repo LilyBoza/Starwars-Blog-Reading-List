@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Image, DropdownButton, Dropdown } from "react-bootstrap";
+import { Navbar, Nav, Image, DropdownButton, Dropdown, Button, Row, Col } from "react-bootstrap";
 import { Context } from "../store/appContext";
 // import { AutomaticPrefetchPlugin } from "webpack";
 
 export const NavbarMenu = () => {
 	const { store, actions } = useContext(Context);
+
 	return (
 		<Navbar>
 			<Navbar.Brand>
@@ -27,13 +28,21 @@ export const NavbarMenu = () => {
 			</Nav>
 
 			<DropdownButton id="dropdown-basic-button" title={`Favoritos ${store.favorites.length}`}>
-				{store.favorites.map((item, index) => {
-					return (
-						<Dropdown.Item key={index} href="#/action-1">
-							{item}
-						</Dropdown.Item>
-					);
-				})}
+				<Row>
+					<Col>
+						{store.favorites.map((item, index) => {
+							return (
+								<Dropdown.Item key={index} href="#/action-1">
+									{item}
+								</Dropdown.Item>
+							);
+						})}
+					</Col>
+					<Button variant="secondary" size="sm">
+						x
+					</Button>
+					<Col />
+				</Row>
 			</DropdownButton>
 		</Navbar>
 	);
