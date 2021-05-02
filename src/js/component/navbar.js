@@ -32,16 +32,15 @@ export const NavbarMenu = () => {
 					<Col>
 						{store.favorites.map((item, index) => {
 							return (
-								<Dropdown.Item key={index} href="#/action-1">
-									{item}
-								</Dropdown.Item>
+								<div key={index}>
+									<Dropdown.Item href="#/action-1">{item}</Dropdown.Item>
+									<Button onClick={() => actions.deleteFavorites(item)} variant="secondary" size="sm">
+										x
+									</Button>
+								</div>
 							);
 						})}
 					</Col>
-					<Button variant="secondary" size="sm">
-						x
-					</Button>
-					<Col />
 				</Row>
 			</DropdownButton>
 		</Navbar>

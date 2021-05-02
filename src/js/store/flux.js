@@ -22,9 +22,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// json.results es lo que me devuelve la API
 			},
 			setFavorites: name => {
-				const store = getStore();
+				const store = getStore(); // me permite acceder al store
 				setStore({ favorites: [...store.favorites, name] });
 			},
+			deleteFavorites: name => {
+				const store = getStore();
+				const index = store.favorites.indexOf(name);
+				if (index > -1) {
+					const newFavorites = store.favorites.filter(item => item !== name);
+					setStore({ favorites: newFavorites });
+				}
+			},
+
 			fetchPlanet: async () => {
 				const URL = "https://www.swapi.tech/api/planets/";
 				const CONFIG = {
